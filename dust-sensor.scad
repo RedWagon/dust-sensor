@@ -35,7 +35,7 @@ SLOT_HEIGHT = CHIP_THICKNESS + 2.5; //initially + 2
 WEMOS_WIDTH = 74;
 WEMOS_HEIGHT = 28;
 
-WEMOS_TOTAL_THICKNESS = 4.8;
+WEMOS_TOTAL_THICKNESS = 2.8;
 WEMOS_PCB_THICKNESS = PCB_THICKNESS;
 WEMOS_SUPPORT_HEIGHT = WEMOS_TOTAL_THICKNESS - WEMOS_PCB_THICKNESS + 2;
 
@@ -347,20 +347,22 @@ module wemos_plate() {
     wemos_screen_width = 28.31;
     wemos_screen_height = 15.64; // initially 18
     wemos_screen_bottom_offset = 7.5; // initially 7.5
-    wemos_screen_side_offset = 5; // initially 7.5
+    wemos_screen_side_offset = 6; // initially 7.5
     
     wemos_usb_to_screen = 2.2;
     
     wemos_usb_width = 1;
-    wemos_usb_height = 12;
+    wemos_usb_height = 14;
     wemos_usb_extra_width = 4;
+    wemos_usb_y_offset = 4;
+
     
     screw_extra_margin_height = 21;
     screw_extra_margin_thickness = 2.55;
     
     wemos_button_hole = 2;
     // offset for right side button from middle
-    wemos_button_x_offset = 20;
+    wemos_button_x_offset = 23;
     wemos_button_y_offset = 8;
     // distance from right button to left
     wemos_button_gap = 5;
@@ -391,7 +393,7 @@ module wemos_plate() {
     
     // USB port
     color("red")
-    translate([(wemos_width-wemos_usb_width+wemos_usb_extra_width)/2+WEMOS_OFFSET, 0, cutout/2-2])    
+    translate([(wemos_width-wemos_usb_width+wemos_usb_extra_width)/2+WEMOS_OFFSET, wemos_usb_y_offset, -BASE_THICKNESS])    
     cube([wemos_usb_width+wemos_usb_extra_width,wemos_usb_height,cutout], true);     
     
     // button holes
@@ -483,9 +485,9 @@ module dust_sensor_front(dust_sensor) {
             dht22_holder(FRONT_WALL_HEIGHT);            
             
             //other dht22 support
-            color("blue")
-            translate([(SENSOR_WIDTH-dht_support_width)/2-6.5,-2,FRONT_WALL_HEIGHT - BASE_THICKNESS - dht_support_thickness/2 - 0])
-            cube([dht_support_width,dht_support_height,dht_support_thickness], true);
+            //color("blue")
+            //translate([(SENSOR_WIDTH-dht_support_width)/2-6.5,-2,FRONT_WALL_HEIGHT - BASE_THICKNESS - dht_support_thickness/2 - 0])
+            //cube([dht_support_width,dht_support_height,dht_support_thickness], true);
 
             dht22_x=6;
             dht22_y=5;
