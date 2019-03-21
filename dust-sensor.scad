@@ -32,8 +32,8 @@ CHIP_THICKNESS = TOTAL_PCB_THICKNESS - PCB_THICKNESS + 1; //initially +0.5
 SLOT_HEIGHT = CHIP_THICKNESS + 2.5; //initially + 2
 
 // WEMOS
-WEMOS_WIDTH = 61.5;
-WEMOS_HEIGHT = 27.5;
+WEMOS_WIDTH = 74;
+WEMOS_HEIGHT = 28;
 
 WEMOS_TOTAL_THICKNESS = 4.8;
 WEMOS_PCB_THICKNESS = PCB_THICKNESS;
@@ -210,6 +210,7 @@ module dht22_holder(height){
     translate([size/2,size/2,height/2])
     color("blue")
     cube([size*2,size,height], true);      
+
 }
 
 module screw_tunnels(height){
@@ -346,15 +347,23 @@ module wemos_plate() {
     wemos_screen_width = 28.31;
     wemos_screen_height = 15.64; // initially 18
     wemos_screen_bottom_offset = 7.5; // initially 7.5
+    wemos_screen_side_offset = 5; // initially 7.5
     
     wemos_usb_to_screen = 2.2;
     
-    wemos_usb_width = 9.9;
+    wemos_usb_width = 1;
     wemos_usb_height = 12;
     wemos_usb_extra_width = 4;
     
     screw_extra_margin_height = 21;
     screw_extra_margin_thickness = 2.55;
+    
+    wemos_button_hole = 2;
+    // offset for right side button from middle
+    wemos_button_x_offset = 20;
+    wemos_button_y_offset = 8;
+    // distance from right button to left
+    wemos_button_gap = 5;
     
     translate_x = (wemos_width-wemos_screw_slot_diameter)/2 - wemos_screw_offset;
     translate_y = (wemos_height-wemos_screw_slot_diameter)/2 - wemos_screw_offset;
@@ -377,13 +386,22 @@ module wemos_plate() {
     
     // Screen cut out
     color("red")
-    translate([(wemos_width-wemos_screen_width)/2 - wemos_usb_width - wemos_usb_to_screen+WEMOS_OFFSET, -(wemos_height-wemos_screen_height)/2 + wemos_screen_bottom_offset, cutout/2])  
+    translate([wemos_screen_side_offset, -(wemos_height-wemos_screen_height)/2 + wemos_screen_bottom_offset, cutout/2])  
     cube([wemos_screen_width,wemos_screen_height,cutout], true);    
     
     // USB port
     color("red")
     translate([(wemos_width-wemos_usb_width+wemos_usb_extra_width)/2+WEMOS_OFFSET, 0, cutout/2-2])    
     cube([wemos_usb_width+wemos_usb_extra_width,wemos_usb_height,cutout], true);     
+    
+    // button holes
+    color("red")
+    translate([wemos_button_x_offset, wemos_button_y_offset, 0])  
+    cylinder(h=cutout, d=wemos_button_hole);    
+
+    color("red")
+    translate([wemos_button_x_offset + wemos_button_gap, wemos_button_y_offset, 0])  
+    cylinder(h=cutout, d=wemos_button_hole);    
     
     // Additional screw cutouts
     color("green")
@@ -464,9 +482,23 @@ module dust_sensor_front(dust_sensor) {
             translate([SENSOR_WIDTH/2 - 9, -SENSOR_HEIGHT/2, 0])
             dht22_holder(FRONT_WALL_HEIGHT);            
             
+            //other dht22 support
             color("blue")
             translate([(SENSOR_WIDTH-dht_support_width)/2-6.5,-2,FRONT_WALL_HEIGHT - BASE_THICKNESS - dht_support_thickness/2 - 0])
             cube([dht_support_width,dht_support_height,dht_support_thickness], true);
+
+            dht22_x=6;
+            dht22_y=5;
+            dht22_z=15;
+
+            dht22_y_to_screw = 26;
+            translate([SENSOR_WIDTH/2-dht22_x,-SENSOR_HEIGHT/2+HOLE_HOLDER-dht22_y/2+dht22_y_to_screw,0])
+            difference() {
+                cube([dht22_x,dht22_y,FRONT_WALL_HEIGHT-BASE_THICKNESS]);
+                translate([0,dht22_y/2,dht22_z/2-BASE_THICKNESS])
+                rotate([0,90,0])
+                cylinder(h=dht22_x,d=HOLE_DIAMETER);
+            }
         };                 
         
         // DHT22
