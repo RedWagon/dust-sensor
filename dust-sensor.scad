@@ -66,8 +66,8 @@ $fn = 128;
 
 //dust_sensor_back();  
 
-translate([0, 0, WALL_HEIGHT + EXPLODE])
-rotate([0,ROTATE,0])
+//translate([0, 0, WALL_HEIGHT + EXPLODE])
+//rotate([0,ROTATE,0])
 dust_sensor_front();
 
 module air_grill(){
@@ -134,6 +134,8 @@ module dht22(){
 
 module screw_head(height) {;
     cylinder(height,SCREW_HEAD_DIAMETER/2, SCREW_HEAD_DIAMETER/2, true);      
+    translate([0,0,height/2])
+    cylinder((SCREW_HEAD_DIAMETER-HOLE_DIAMETER)/2,SCREW_HEAD_DIAMETER/2, HOLE_DIAMETER/2 );      
 }
 
 module screw_pole(height, additional_thickness){
@@ -344,10 +346,10 @@ module wemos_plate() {
     wemos_screw_offset = WEMOS_SCREW_OFFSET;
     wemos_screw_slot_diameter = 3;
     
-    wemos_screen_width = 28.31;
+    wemos_screen_width = 26.81;
     wemos_screen_height = 15.64; // initially 18
     wemos_screen_bottom_offset = 7.5; // initially 7.5
-    wemos_screen_side_offset = 6; // initially 7.5
+    wemos_screen_side_offset = 7.5; // initially 7.5
     
     wemos_usb_to_screen = 2.2;
     
@@ -360,12 +362,12 @@ module wemos_plate() {
     screw_extra_margin_height = 21;
     screw_extra_margin_thickness = 2.55;
     
-    wemos_button_hole = 2;
+    wemos_button_hole = 2.3;
     // offset for right side button from middle
-    wemos_button_x_offset = 23;
-    wemos_button_y_offset = 8;
+    wemos_button_x_offset = 24;
+    wemos_button_y_offset = 8.3;
     // distance from right button to left
-    wemos_button_gap = 5;
+    wemos_button_gap = 4;
     
     translate_x = (wemos_width-wemos_screw_slot_diameter)/2 - wemos_screw_offset;
     translate_y = (wemos_height-wemos_screw_slot_diameter)/2 - wemos_screw_offset;
