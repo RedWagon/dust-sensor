@@ -66,8 +66,8 @@ $fn = 128;
 
 //dust_sensor_back();  
 
-//translate([0, 0, WALL_HEIGHT + EXPLODE])
-//rotate([0,ROTATE,0])
+translate([0, 0, WALL_HEIGHT + EXPLODE])
+rotate([0,ROTATE,0])
 dust_sensor_front();
 
 module air_grill(){
