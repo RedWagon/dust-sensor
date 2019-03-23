@@ -349,7 +349,7 @@ module wemos_plate() {
     wemos_screen_width = 26.81;
     wemos_screen_height = 15.64; // initially 18
     wemos_screen_bottom_offset = 7.5; // initially 7.5
-    wemos_screen_side_offset = 7.5; // initially 7.5
+    wemos_screen_side_offset = 6.5; // initially 7.5
     
     wemos_usb_to_screen = 2.2;
     
@@ -364,10 +364,10 @@ module wemos_plate() {
     
     wemos_button_hole = 2.3;
     // offset for right side button from middle
-    wemos_button_x_offset = 24;
+    wemos_button_x_offset = 23;
     wemos_button_y_offset = 8.3;
     // distance from right button to left
-    wemos_button_gap = 4;
+    wemos_button_gap = 4.5;
     
     translate_x = (wemos_width-wemos_screw_slot_diameter)/2 - wemos_screw_offset;
     translate_y = (wemos_height-wemos_screw_slot_diameter)/2 - wemos_screw_offset;
