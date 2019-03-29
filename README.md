@@ -1,3 +1,7 @@
+# Updates in this fork
+
+![updates
+](https://raw.githubusercontent.com/RedWagon/dust-sensor/master/new_version.jpg)
 __Links to the parts contain Banggood's affilate metadata.__
 
 # DOCS TODO:
